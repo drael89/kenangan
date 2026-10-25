@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Little Universe 💗</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --pink: #ed9dbb;
+  --purple: #9d83c9;
+  --dark: #342641;
+  --cream: #fff8fc;
+}
+
+body {
+  font-family: "Georgia", serif;
+  background: #fff8fc;
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 10% 10%, #fbd8e8 0, transparent 35%),
+    radial-gradient(circle at 90% 40%, #e9ddff 0, transparent 35%),
+    linear-gradient(160deg, #fff8fc, #f9efff, #fff4f7);
+}
+
+#petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.petal {
+  position: absolute;
+  top: -35px;
+  animation: falling linear infinite;
+  opacity: .7;
+}
+
+@keyframes falling {
+  to {
+    transform: translateY(110vh) rotate(540deg);
+  }
+}
+
+.hero {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 55px 22px;
+  background: linear-gradient(160deg, #f8e8ffcc, #fff0f6cc);
+  border-radius: 0 0 45px 45px;
+}
+
+.eyebrow {
+  font-family: Arial, sans-serif;
+  letter-spacing: 4px;
+  font-size: 11px;
+  color: #9770b6;
+}
+
+.hero-heart {
+  font-size: 65px;
+  margin: 22px 0;
+  filter: drop-shadow(0 7px 12px #e7a5c8);
+  animation: beat 1.5s infinite;
+}
+
+@keyframes beat {
+  50% { transform: scale(1.12); }
+}
+
+h1 {
+  font-size: clamp(34px, 8vw, 58px);
+  line-height: 1.2;
+  color: #8f659f;
+  margin-bottom: 18px;
+}
+
+.hero p {
+  max-width: 520px;
+  line-height: 1.9;
+  font-size: 15px;
+  color: #66516f;
+}
+
+.signature {
+  margin-top: 28px;
+  color: #c06e9b;
+  font-style: italic;
+}
+
+section {
+  max-width: 850px;
+  padding: 55px 20px;
+  margin: auto;
+}
+
+.section-label {
+  text-align: center;
+  font: 11px Arial, sans-serif;
+  letter-spacing: 3px;
+  color: #ae83be;
+  margin-bottom: 10px;
+}
+
+h2 {
+  text-align: center;
+  color: #8f659f;
+  font-size: clamp(25px, 6vw, 34px);
+  margin-bottom: 25px;
+}
+
+.intro-card {
+  background: #ffffffc9;
+  border: 1px solid #eed7f3;
+  padding: 28px 23px;
+  border-radius: 25px;
+  box-shadow: 0 12px 35px #9470a514;
+  line-height: 2;
+  text-align: center;
+  font-size: 15px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.photo {
+  background: white;
+  padding: 8px 8px 15px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px #795b8d17;
+  transition: transform .3s;
+}
+
+.photo:hover {
+  transform: translateY(-5px);
+}
+
+.photo img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+.photo p {
+  text-align: center;
+  padding: 12px 4px 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #765b81;
+}
+
+.photo.large {
+  grid-column: span 2;
+}
+
+.photo.large img {
+  height: 340px;
+}
+
+.note {
+  background: linear-gradient(145deg, #fff, #fff0f7);
+  border: 1px solid #f0d5e5;
+  border-radius: 25px;
+  padding: 28px 23px;
+  box-shadow: 0 10px 30px #a77aa41c;
+}
+
+.note p {
+  line-height: 2;
+  font-size: 15px;
+}
+
+.center {
+  text-align: center;
+}
+
+button {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(120deg, #dca3dc, #e9a2c0);
+  color: white;
+  font-weight: bold;
+  border: 0;
+  border-radius: 30px;
+  padding: 14px 23px;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0 7px 18px #bb86bd35;
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+#loveLetter {
+  display: none;
+  margin-top: 25px;
+  padding-top: 23px;
+  border-top: 1px dashed #dcb8df;
+  animation: appear .6s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.promises {
+  display: grid;
+  gap: 14px;
+}
+
+.promise {
+  background: #ffffffd9;
+  border: 1px solid #f0dced;
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.promise .emoji {
+  font-size: 27px;
+}
+
+.promise h3 {
+  color: #966da6;
+  font-size: 17px;
+  margin-bottom: 7px;
+}
+
+.promise p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #705d77;
+}
+
+.final-card {
+  background: linear-gradient(140deg, #e9dafa, #ffe5ef);
+  text-align: center;
+  padding: 35px 22px;
+  border-radius: 28px;
+  line-height: 2;
+}
+
+.final-card h2 {
+  margin-bottom: 15px;
+}
+
+footer {
+  padding: 35px 20px 45px;
+  text-align: center;
+  color: #9777a3;
+  line-height: 2;
+  font-size: 13px;
+}
+
+#surprise {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #342641df;
+  backdrop-filter: blur(7px);
+}
+
+.surprise-card {
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  background: #fff7fc;
+  padding: 35px 24px;
+  border-radius: 25px;
+  animation: appear .5s ease;
+}
+
+.surprise-card .big {
+  font-size: 55px;
+}
+
+.surprise-card h2 {
+  margin: 15px 0;
+}
+
+.surprise-card p {
+  line-height: 1.9;
+}
+
+@media (max-width: 450px) {
+  .photo img { height: 180px; }
+  .photo.large img { height: 260px; }
+  section { padding: 42px 17px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="petals"></div>
+
+<header class="hero">
+  <div class="eyebrow">A LITTLE WEBSITE MADE FOR YOU</div>
+  <div class="hero-heart">💗</div>
+
+  <h1>Our Little<br>Universe</h1>
+
+  <p>
+    di antara banyaknya hal yang bisa aku temukan di dunia,
+    salah satu hal yang paling aku syukuri adalah kesempatan
+    untuk mengenal kamu dan menciptakan kenangan bersamamu mwehhee.
+  </p>
+
+  <div class="signature">
+    untuk seseorang yang istimewa di hatiku 🌷
+  </div>
+</header>
+
+<section>
+  <div class="section-label">A MESSAGE FROM MY HEART</div>
+  <h2>hai dell, kesayanganku 🤍</h2>
+
+  <div class="intro-card">
+    aku mungkin nggak selalu pandai mengungkapkan perasaan
+    lewat kata-kata. kadang aku cuma bisa bercanda, mengganggu
+    kamu, atau mengirim hal-hal sederhana.
+    <br><br>
+    tapi di balik semua itu, aku ingin kamu taw bahwa
+    kehadiranmu punya arti buat aku. Aku senang bisa berbagi
+    cerita, tertawa bareng, dan menyimpan momen-momen kecil
+    yang suatu hari nanti bisa kita kenang kembali.
+    <br><br>
+    <strong>
+      buat aku, kenangan indah nggak harus selalu mewah.
+      Kadang cukup ada kamu, aku, dan tawa sederhana kita. 🌸
+    </strong>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">OUR PRECIOUS MEMORIES</div>
+  <h2>potongan cerita kita 📷</h2>
+
+  <div class="gallery">
+    <div class="photo">
+      <img src="1.jpeg" alt="Kenangan kita pertama">
+      <p>foto sederhana yang menyimpan cerita tersendiri. 💗</p>
+    </div>
+
+    <div class="photo">
+      <img src="WhatsApp Image 2026-10-25 at 15.48.05.jpeg" alt="Kenangan lucu kita">
+      <p>kalo bareng kamu, hal konyol pun jadi kenangan HAHAHA. 😂</p>
+    </div>
+
+    <div class="photo large">
+      <img src="2.jpeg" alt="Momen bersama">
+      <p>
+        ndaa perlu selalu terlihat sempurna.
+        yang penting kita bisa tertawa dan menjadi diri sendiri huhuy. 🌷
+      </p>
+    </div>
+
+    <div class="photo">
+      <img src="WhatsApp Image 2026-07-27 at 20.58.41 (2).jpeg" alt="Momen manis kita">
+      <p>satu foto, banyak cerita yang bisa dikenang. ✨</p>
+    </div>
+
+    <div class="photo">
+      <img src="WhatsApp Image 2026-10-25 at 15.48.06.jpeg" alt="Momen bahagia">
+      <p>semoga masih banyak kenangan indah yang menunggu. 🌹</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">A LETTER JUST FOR YOU</div>
+  <h2>ada pesan untukmu 💌</h2>
+
+  <div class="note">
+    <p class="center">
+      ada beberapa hal yang mungkin belum sempat aku
+      sampaikan secara langsung.
+      <br>
+      maww baca surat kecil dari aku?
+    </p>
+
+    <div class="center">
+      <button onclick="toggleLetter()" id="letterButton">
+        buka surat cintaku 💌
+      </button>
+    </div>
+
+    <div id="loveLetter">
+      <p>
+        <strong>untuk kamu, orang yang aku sayangi. 💗</strong>
+        <br><br>
+        terima kasih sudah hadir dan menjadi bagian dari
+        hari-hari aku. terima kasih untuk waktu, perhatian,
+        obrolan, tawa, dan hal-hal kecil yang mungkin
+        terlihat biasa, tetapi berarti buat aku.
+        <br><br>
+        aku suka bagaimana kita bisa punya momen lucu
+        bersama, bahkan hanya karena foto dengan filter
+        yang aneh HAHAHA. Saat melihat foto-foto itu, aku jadi
+        ingat bahwa kebahagiaan bisa datang dari hal
+        sesederhana menghabiskan waktu bersama.
+        <br><br>
+        aku juga sadar kalau aku bukan orang yang selalu
+        benar. Aku bisa melakukan kesalahan, salah bicara,
+        atau belum memahami perasaanmu dengan baik.
+        kalau pernah ada sikapku yang membuatmu sedih,
+        aku minta maaf, yha. Aku ingin belajar menjadi
+        seseorang yang lebih baik dalam memperlakukanmu.
+        <br><br>
+        aku maww hubungan ini menjadi tempat bagi kita
+        untuk saling bercerita, saling mendengarkan,
+        saling menghargai, dan saling mendukung.
+        bukan menuntut kita menjadi sempurna,
+        tetapi belajar menghadapi masalah dengan lebih dewasa.
+        <br><br>
+        aku ndaa tahu semua hal yang akan kita temui
+        ke depannya. namun, selama kita sama-sama ingin
+        menjaga hubungan ini, aku berharap kita bisa
+        terus menciptakan kenangan yang baik dan
+        memperlakukan satu sama lain dengan tulus.
+        <br><br>
+        kalau suatu hari kamu sedang lelah, semoga kamu
+        ingat bahwa kamu berharga, kamu pantas dihargai,
+        dan kamu juga berhak mengejar semua impianmu.
+        aku ingin melihat kamu tumbuh, bahagia,
+        dan bangga dengan dirimu sendiri.
+        <br><br>
+        <strong>
+          aku sayang kamu. bukan hanya karena momen
+          bahagia yang kita punya, tetapi juga karena
+          aku ingin belajar menghargai kamu dan hubungan
+          ini dengan lebih baik, setiap hari. 💗
+        </strong>
+        <br><br>
+        dengan tulus,<br>
+        seseorang yang senang punya cerita bersamamu. 🌷
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">THINGS I WISH FOR US</div>
+  <h2>harapan kecilku 🌷</h2>
+
+  <div class="promises">
+    <div class="promise">
+      <div class="emoji">🤍</div>
+      <div>
+        <h3>saling memahami</h3>
+        <p>
+          semoga kita bisa saling mendengarkan tanpa
+          terburu-buru menghakimi, terutama saat ada
+          perbedaan pendapat.
+        </p>
+      </div>
+    </div>
+
+    <div class="promise">
+      <div class="emoji">🌱</div>
+      <div>
+        <h3>tumbuh bersama</h3>
+        <p>
+          semoga kita bisa saling mendukung impian,
+          menghargai waktu masing-masing, dan terus
+          belajar menjadi pribadi yang lebih baik.
+        </p>
+      </div>
+    </div>
+
+    <div class="promise">
+      <div class="emoji">🌸</div>
+      <div>
+        <h3>menyimpan kenangan</h3>
+        <p>
+          semoga nanti ada lebih banyak foto lucu,
+          cerita random, obrolan panjang, dan momen
+          sederhana yang membuat kita tersenyum.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="final-card">
+    <h2>One Last Thing 💗</h2>
+    aku mungkin nggak bisa membuat setiap hari
+    menjadi hari yang sempurna.
+    <br><br>
+    tapi aku berharap kita selalu punya alasan
+    untuk tersenyum, keberanian untuk saling bicara,
+    dan kemauan untuk saling menghargai.
+    <br><br>
+    <strong>
+      terima ksih sudah menjadi bagian
+      dari cerita hidupku. 🌷
+    </strong>
+    <br>
+    <button onclick="showSurprise()">
+      ada satu kejutan lagi ✨
+    </button>
+  </div>
+</section>
+
+<div id="surprise" onclick="hideSurprise()">
+  <div class="surprise-card" onclick="event.stopPropagation()">
+    <div class="big">💐💗🌷</div>
+    <h2>Untuk Kamu</h2>
+    <p>
+      kalau halaman ini bisa menyampaikan satu hal,
+      aku ingin hal itu adalah:
+      <br><br>
+      <strong>
+        kamu adalah seseorang yang layak disayangi,
+        dihargai, disabarin, dan didengarkan.
+      </strong>
+      <br><br>
+      semoga hari-harimu dipenuhi kebahagiaan,
+      dan semoga kita terus punya cerita baik
+      untuk dikenang. 🤍
+    </p>
+    <button onclick="hideSurprise()">kembali ke kenangan kita 💗</button>
+  </div>
+</div>
+
+<footer>
+  <div style="font-size:28px">🌸 ♡ 🌷 ♡ 🌸</div>
+  <p>dirangkai dengan tulus, khusus untukmu.</p>
+  <p>Our Little Universe · Made with love 💗</p>
+</footer>
+
+<script>
+function toggleLetter() {
+  const letter = document.getElementById("loveLetter");
+  const button = document.getElementById("letterButton");
+  const isOpen = letter.style.display === "block";
+
+  letter.style.display = isOpen ? "none" : "block";
+  button.textContent = isOpen
+    ? "Buka surat cintaku 💌"
+    : "Tutup surat 💗";
+}
+
+function showSurprise() {
+  document.getElementById("surprise").style.display = "flex";
+}
+
+function hideSurprise() {
+  document.getElementById("surprise").style.display = "none";
+}
+
+const petals = document.getElementById("petals");
+const symbols = ["🌸", "🌷", "💗", "✿", "✨"];
+
+for (let i = 0; i < 24; i++) {
+  const item = document.createElement("span");
+  item.className = "petal";
+  item.textContent =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+  item.style.left = Math.random() * 100 + "%";
+  item.style.fontSize = (12 + Math.random() * 15) + "px";
+  item.style.animationDuration = (9 + Math.random() * 12) + "s";
+  item.style.animationDelay = (-Math.random() * 20) + "s";
+
+  petals.appendChild(item);
+}
+</script>
+
+</body>
+</html>
